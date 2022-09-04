@@ -5,7 +5,7 @@ My attempt at the CSES problem set.
 Completed: 20/300 
 Attempted: 23/300 
 ## Introductory Problems
-| Question        | Status      |
+| Problem &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;               | Status      |
 |:-------------------------|:----:|
 |Weird Algorithm|🟢|
 |Missing Number|🟢|
@@ -27,7 +27,7 @@ Attempted: 23/300
 |Digit Queries|⚪|
 |Grid Paths|⚪|
 ## Sorting and Searching
-| Question        | Status      |
+| Problem &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;               | Status      |
 |:-------------------------|:----:|
 |Distinct Numbers|⚪|
 |Apartments|⚪|
@@ -65,7 +65,7 @@ Attempted: 23/300
 |Movie Festival II|⚪|
 |Maximum Subarray Sum II|⚪|
 ## Dynamic Programming
-| Question        | Status      |
+| Problem &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;               | Status      |
 |:-------------------------|:----:|
 |Dice Combinations|⚪|
 |Minimizing Coins|⚪|
@@ -87,7 +87,7 @@ Attempted: 23/300
 |Counting Tilings|⚪|
 |Counting Numbers|⚪|
 ## Graph Algorithms
-| Question        | Status      |
+| Problem &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;               | Status      |
 |:-------------------------|:----:|
 |Counting Rooms|🟢|
 |Labyrinth|⚪|
@@ -126,7 +126,7 @@ Attempted: 23/300
 |School Dance|⚪|
 |Distinct Routes|⚪|
 ## Range Queries
-| Question        | Status      |
+| Problem &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;               | Status      |
 |:-------------------------|:----:|
 |Static Range Sum Queries|🟢|
 |Static Range Minimum Queries|🟢|
@@ -148,7 +148,7 @@ Attempted: 23/300
 |Polynomial Queries|⚪|
 |Range Queries and Copies|⚪|
 ## Tree Algorithms
-| Question        | Status      |
+| Problem &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;               | Status      |
 |:-------------------------|:----:|
 |Subordinates|🟢|
 |Tree Matching|🟢|
@@ -167,7 +167,7 @@ Attempted: 23/300
 |Fixed-Length Paths I|⚪|
 |Fixed-Length Paths II|⚪|
 ## Mathematics
-| Question        | Status      |
+| Problem &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;               | Status      |
 |:-------------------------|:----:|
 |Josephus Queries|⚪|
 |Exponentiation|⚪|
@@ -201,7 +201,7 @@ Attempted: 23/300
 |Grundy's Game|⚪|
 |Another Game|⚪|
 ## String Algorithms
-| Question        | Status      |
+| Problem &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;               | Status      |
 |:-------------------------|:----:|
 |Word Combinations|⚪|
 |String Matching|⚪|
@@ -221,7 +221,7 @@ Attempted: 23/300
 |Substring Order II|⚪|
 |Substring Distribution|⚪|
 ## Geometry
-| Question        | Status      |
+| Problem &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;               | Status      |
 |:-------------------------|:----:|
 |Point Location Test|⚪|
 |Line Segment Intersection|⚪|
@@ -231,7 +231,7 @@ Attempted: 23/300
 |Minimum Euclidean Distance|⚪|
 |Convex Hull|⚪|
 ## Advanced Techniques
-| Question        | Status      |
+| Problem &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;               | Status      |
 |:-------------------------|:----:|
 |Meet in the Middle|⚪|
 |Hamming Distance|⚪|
@@ -258,7 +258,7 @@ Attempted: 23/300
 |Task Assignment|⚪|
 |Distinct Routes II|⚪|
 ## Additional Problems
-| Question        | Status      |
+| Problem &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;               | Status      |
 |:-------------------------|:----:|
 |Shortest Subsequence|⚪|
 |Counting Bits|⚪|
