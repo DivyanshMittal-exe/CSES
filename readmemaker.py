@@ -46,7 +46,7 @@ My attempt at the CSES problem set.
 '''
 
 table_text  = '''
-| Question        | Status      |
+| Question &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;        | Status      |
 |:-------------------------|:----:|
 '''
 
