@@ -56,7 +56,7 @@ using ld = long double;
 #define SE second
 #define MT make_tuple
 #define fastio ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
-
+const int maxN = 1e5+1;
 template <class T>
 using pqg = priority_queue<T, vector<T>, greater<T>>;
 typedef tuple<int, int, int> iii;
@@ -82,35 +82,43 @@ template<typename T> T lcm(T a, T b){return(a*(b/gcd(a,b)));}
 ll cdiv(ll a, ll b) { return a / b + ((a ^ b) > 0 && a % b); } // divide a by b rounded up
 ll fdiv(ll a, ll b) { return a / b - ((a ^ b) < 0 && a % b); } // divide a by b rounded down
 
-int main()
-{
+int N, M, a, b;
+bool possible, vis[maxN], team[maxN];
+vector<int> G[maxN];
 
-    #ifndef ONLINE_JUDGE 
-        freopen("input.txt", "r", stdin);
-        freopen("output.txt", "w", stdout);
-        auto start = std::chrono::high_resolution_clock::now();
-    #endif
+void dfs(int u, int p = 0){
+    for(int v : G[u]){
+        if(v != p){
+            if(!vis[v]){
+                team[v] = !team[u];
+                vis[v] = true;
+                dfs(v, u);
+            } else
+                if(team[v] == team[u])
+                    possible = false;
+        }
+    }
+}
 
-    fastio;
-
-
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> values[i];
+int main(){
+    scanf("%d %d", &N, &M);
+    for(int i = 0; i < M; i++){
+        scanf("%d %d", &a, &b);
+        G[a].push_back(b);
+        G[b].push_back(a);
     }
 
+    possible = true;
+    for(int i = 1; i <= N; i++){
+        if(!vis[i]){
+            vis[i] = true;
+            dfs(i);
+        }
+    }
 
-
-
-
-
-    #ifndef ONLINE_JUDGE
-        auto stop = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-        cerr << "Time taken: "<< duration.count() << " ms" << endl;
-    #endif
-    return 0;
+    if(!possible)
+        printf("IMPOSSIBLE\n");
+    else
+        for(int i = 1; i <= N; i++)
+            printf("%d%c", (team[i] ? 1 : 2), (" \n")[i==N]);
 }

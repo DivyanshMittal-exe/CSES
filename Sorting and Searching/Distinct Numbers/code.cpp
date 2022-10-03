@@ -102,6 +102,10 @@ int main()
         cin >> values[i];
     }
 
+    sort(all(values));
+    values.resize(unique(values.begin(), values.end()) - values.begin());
+    cout << sz(values);
+
 
 
 

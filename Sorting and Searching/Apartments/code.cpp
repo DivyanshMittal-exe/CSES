@@ -94,14 +94,37 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
+    ll n,m,k;
+    cin >> n >> m >> k;
+    vector<ll> d(n);
     for (int i = 0; i < n; i++)
     {
-        cin >> values[i];
+        cin >> d[i];
     }
 
+    vl h(m);
+    rep(i,0,m){
+        cin >> h[i];
+    }
+
+    sort(all(d));
+    sort(all(h));
+    int count = 0;
+
+    int i = 0, j = 0;
+    while( i < n && j < m){
+        if(d[i] - k <= h[j] && d[i] + k >= h[j]){
+            i++;
+            j++;
+            count ++;
+        }else if(d[i]-k > h[j]){
+            j++;
+        }else if(d[i] + k < h[j]){
+            i++;
+        }
+    }
+
+    cout << count;
 
 
 

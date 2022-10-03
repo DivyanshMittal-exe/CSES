@@ -94,13 +94,16 @@ int main()
     fastio;
 
 
-    ll n;
+    int n;
     cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> values[i];
+    vector<int> dp(n+1,0);
+    dp[0] = 1;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= 6 && i-j >= 0; j++) {
+        (dp[i] += dp[i-j]) %= MOD;
+        }
     }
+    cout << dp[n];
 
 
 

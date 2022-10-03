@@ -1,4 +1,6 @@
 #pragma GCC optimize("Ofast,unroll-loops") 
+#pragma comment(linker, "/STACK:16777216")
+
 #include <bits/stdc++.h>
 using namespace std;
 mt19937 RNG(chrono::steady_clock::now().time_since_epoch().count());
@@ -82,6 +84,63 @@ template<typename T> T lcm(T a, T b){return(a*(b/gcd(a,b)));}
 ll cdiv(ll a, ll b) { return a / b + ((a ^ b) > 0 && a % b); } // divide a by b rounded up
 ll fdiv(ll a, ll b) { return a / b - ((a ^ b) < 0 && a % b); } // divide a by b rounded down
 
+
+int dpt[100005][102];
+
+
+int dp(int index, int val_before_index,int n, int m, const vector<int> & values){
+    // debug(index);
+
+    if(index >= n){
+        debug(index,val_before_index);
+        return 0;
+    }
+
+    if(dpt[index][val_before_index] != -1){
+        return dpt[index][val_before_index];
+    }
+
+
+    if(index == n-1){
+        if(values[index] == 0){
+            if(val_before_index == 1 || val_before_index == m)
+                return 2;
+            else
+                return 3;       
+        }else if(values[index] - val_before_index <= 1 and values[index] - val_before_index >= -1){
+            
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    // debug(values[index] - val_before_index <= 1 && values[index] - val_before_index >= -1);
+
+    if(val_before_index == 0 and values[index] == 0){
+        ll sum = 0;
+        rep(i,1,m+1){
+            sum += dp(index + 1, i,n,m,values)% MOD ;
+        }
+        return sum;
+    }else if(values[index] == 0){
+        if(val_before_index == 1){
+            return dp(index + 1, val_before_index ,n,m,values) + dp(index + 1, val_before_index + 1 ,n,m,values) % MOD ;
+        }else if(val_before_index == m){
+            return dp(index + 1, val_before_index ,n,m,values) + dp(index + 1, val_before_index - 1 ,n,m,values) % MOD ;
+        }else{
+            return dp(index + 1, val_before_index + 1,n,m,values) + dp(index + 1, val_before_index ,n,m,values) + dp(index + 1, val_before_index - 1 ,n,m,values) % MOD ;
+        }
+    }else if(values[index] - val_before_index <= 1 && values[index] - val_before_index >= -1){
+        // debug("Got here");
+        return dp(index + 1, values[index] ,n,m,values);
+    }else{
+        return 0;
+    }
+
+
+}
+
 int main()
 {
 
@@ -94,17 +153,41 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> values[i];
+int mod = 1e9+7;
+  int n, m;
+  cin >> n >> m;
+  vector<vector<int>> dp(n,vector<int>(m+1,0));
+  int x0;
+  cin >> x0;
+  if (x0 == 0) {
+    fill(dp[0].begin(), dp[0].end(), 1);
+  } else {
+    dp[0][x0] = 1;
+  }
+  for (int i = 1; i < n; i++) {
+    int x;
+    cin >> x;
+    if (x == 0) {
+      for (int j = 1; j <= m; j++) {
+	for (int k : {j-1,j,j+1}) {
+	  if (k >= 1 && k <= m) {
+	    (dp[i][j] += dp[i-1][k]) %= mod;
+	  }
+	}
+      }
+    } else {
+      for (int k : {x-1,x,x+1}) {
+	if (k >= 1 && k <= m) {
+	  (dp[i][x] += dp[i-1][k]) %= mod;
+	}
+      }
     }
-
-
-
-
+  }
+  int ans = 0;
+  for (int j = 1; j <= m; j++) {
+    (ans += dp[n-1][j]) %= mod;
+  }
+  cout << ans << endl;
 
 
     #ifndef ONLINE_JUDGE

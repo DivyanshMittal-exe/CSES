@@ -102,6 +102,12 @@ int main()
         cin >> values[i];
     }
 
+    ll mx = values[0], sm = values[0];
+    rep(i,1,n){
+        sm = max(sm+values[i], values[i]);
+        mx = max(mx,sm);
+    }
+    cout << mx;
 
 
 

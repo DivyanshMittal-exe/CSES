@@ -88,28 +88,44 @@ int main()
     #ifndef ONLINE_JUDGE 
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
-        auto start = std::chrono::high_resolution_clock::now();
+        auto start = chrono::high_resolution_clock::now();
     #endif
 
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> values[i];
-    }
+   string str1;
+	string str2;
+	cin >> str1 >> str2;
+	/*
+	 * dp[i][j] is the minimum number of moves to change the first i letters
+	 * of the string into the first j letters of result.
+	 */
+	vector<vector<int>> dp(str1.size() + 1, vector<int>(str2.size() + 1, INT32_MAX));
+	dp[0][0] = 0;
+	for (int i = 0; i <= str1.size(); i++) {
+		for (int j = 0; j <= str2.size(); j++) {
+			if (i != 0) {
+				dp[i][j] = min(dp[i][j], dp[i - 1][j] + 1);
+			}
+			if (j != 0) {
+				dp[i][j] = min(dp[i][j], dp[i][j - 1] + 1);
+			}
 
-
+			if (i != 0 && j != 0) {
+				int new_cost = dp[i - 1][j - 1] + (str1[i - 1] != str2[j - 1]);
+				dp[i][j] = min(dp[i][j], new_cost);
+			}
+		}
+	}
+	cout << dp[str1.size()][str2.size()] << endl;
 
 
 
 
     #ifndef ONLINE_JUDGE
-        auto stop = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+        auto stop = chrono::high_resolution_clock::now();
+        auto duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
         cerr << "Time taken: "<< duration.count() << " ms" << endl;
     #endif
     return 0;

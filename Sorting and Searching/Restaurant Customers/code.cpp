@@ -96,11 +96,25 @@ int main()
 
     ll n;
     cin >> n;
-    vector<ll> values(n);
+    vector<pair<int,int>> values(2*n);
     for (int i = 0; i < n; i++)
     {
-        cin >> values[i];
+        // cin >> values[i];
+        int a,b;
+        cin >> a >> b;
+        values[2*i]  = {a,-1};
+        values[2*i+1]  = {b,1};
     }
+
+    sort(all(values));
+
+    int mx = 0;
+    int count = 0;
+    tr(ii,values){
+         count -= ii->second;
+         mx = maX(mx,count  );
+    }
+    cout << mx;
 
 
 

@@ -94,13 +94,29 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> values[i];
-    }
+    const int maxn=2e5+10;
+
+    int n,x,p[maxn],i,j,ans = 0;
+    bool have_gondola_yet[maxn];
+
+    cin >> n >> x;
+	for (int i=0;i<n;++i) cin >> p[i];
+	sort(p,p+n);
+	i=0;j=n-1;
+	while (i<j){
+		if (p[i]+p[j]>x){
+			--j;
+		}
+		else{ 
+			++ans;
+			have_gondola_yet[i]=have_gondola_yet[j]=true;
+			++i; --j; 
+		}
+	}
+	for (int i=0;i<n;++i){
+		ans+= have_gondola_yet[i] == false;
+	}
+	cout << ans << "\n";
 
 
 

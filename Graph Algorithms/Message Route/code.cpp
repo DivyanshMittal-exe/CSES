@@ -94,16 +94,57 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
+    ll n,m;
+    cin >> n >> m;
+    vvl graph(n+1);
+
+    vector<bool> visited(n+1);
+    vector<int> parent(n+1);
+
+    for (int i = 0; i < m; i++)
     {
-        cin >> values[i];
+        ll x,y;
+        cin >> x >> y;
+        graph[x].push_back(y);
+        graph[y].push_back(x);
     }
 
+    deque<int> q;
 
+    q.push_back(1);
 
+    while (!q.empty())
+    {
+        auto e = q[0];
+        q.pop_front();
+        for(auto n: graph[e]){
+            if(!visited[n]){
+                q.push_back(n);
+                parent[n] = e;
+                visited[n] = true;
+            }
+        }
+    }
+
+    if(!visited[n]){
+        cout << "IMPOSSIBLE\n";
+    }else{
+        deque<int> s;
+        s.push_back(n);
+        int e = n;
+        while(e != 1){
+            e = parent[e];
+            s.push_front(e);
+        }
+
+        cout << sz(s) << endl;
+
+        tr(ii,s){
+            cout << *ii << " ";
+        }
+
+    }
+    
 
 
 

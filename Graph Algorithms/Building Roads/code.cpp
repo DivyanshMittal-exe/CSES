@@ -94,16 +94,44 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
+    ll n,m;
+    cin >> n >> m;
+    vvl graph(n+1);
+
+    vector<bool> visited(n+1);
+    vector<int> reps;
+
+    for (int i = 0; i < m; i++)
     {
-        cin >> values[i];
+        ll x,y;
+        cin >> x >> y;
+        graph[x].push_back(y);
+        graph[y].push_back(x);
     }
 
 
+    function<void(int)> dfs = [&](int x){
+        if(!visited[x]){
+            visited[x] = true;
+            for(auto y: graph[x]){
+                dfs(y);
+            }
+        }
+    };
 
+    rep(i,1,n+1){
+        if(!visited[i]){
+            dfs(i);
+            reps.push_back(i);
+        }
+    }
+
+    cout << sz(reps) - 1 << endl;
+    
+    rep(i,0,sz(reps) - 1){
+        cout << reps[i] << " " << reps[i+1] << endl;
+    }
+    
 
 
 
