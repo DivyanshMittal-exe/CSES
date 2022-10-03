@@ -1,3 +1,4 @@
+from base64 import encode
 from bs4 import BeautifulSoup
 import requests
 
@@ -36,7 +37,7 @@ soup = BeautifulSoup(r.text,"lxml")
 
 probs = soup.find_all('li',class_ = 'task')
 
-f = open("README.md", "w")
+f = open("README.md", "w", encoding="utf-16")
 
 initial = '''# CSES
 
