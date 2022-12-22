@@ -94,12 +94,37 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> values[i];
+const ll N = 505;
+ll dis[N][N];
+
+    ll n,m,q; 
+    cin >> n >> m >> q;
+    rep(i,1,n+1){
+        rep(j,1,n+1){
+            dis[i][j]=INF;
+        }
+    }
+    rep(i,0,m){
+        ll u,v,w; 
+        cin >> u >> v >> w;
+        dis[u][u]=0, dis[v][v]=0;
+        dis[u][v]=min(dis[u][v],w), dis[v][u]=min(dis[u][v],w);
+    }
+
+    rep(k,1,n+1){
+        rep(i,1,n+1){
+            rep(j,1,n+1){
+                dis[i][j] = min(dis[i][j],dis[i][k]+dis[k][j]);
+            }
+        }
+    }
+    rep(i,0,q){
+        int a,b;
+        cin >> a >> b;
+        if (dis[a][b]<INF)
+            cout << dis[a][b] << endl;
+        else 
+            cout << -1 << endl;
     }
 
 

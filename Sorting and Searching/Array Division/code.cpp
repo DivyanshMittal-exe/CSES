@@ -81,6 +81,37 @@ template<typename T> T gcd(T a, T b){return(b?__gcd(a,b):a);}
 template<typename T> T lcm(T a, T b){return(a*(b/gcd(a,b)));} 
 ll cdiv(ll a, ll b) { return a / b + ((a ^ b) > 0 && a % b); } // divide a by b rounded up
 ll fdiv(ll a, ll b) { return a / b - ((a ^ b) < 0 && a % b); } // divide a by b rounded down
+    
+    
+    
+
+
+bool ok(ll x,ll n, ll k,const vector<ll> & values){
+    ll count = 0;
+    ll sum = 0;
+
+    rep(i,0,n){
+        if(values[i] > x){
+            return false;
+        }
+
+        if(sum + values[i] > x ){
+            sum = 0;
+            ++count;
+            
+            if(count >= k){
+                return false;
+            }
+        }
+
+        sum += values[i];
+
+    }
+    return true;
+}
+
+
+
 
 int main()
 {
@@ -93,18 +124,33 @@ int main()
 
     fastio;
 
-
-    ll n;
-    cin >> n;
+    ll n,k;
+     cin >> n >> k;
     vector<ll> values(n);
+
+   
+
+    debug(n,k);
+
     for (int i = 0; i < n; i++)
     {
         cin >> values[i];
     }
 
+    debug(values);
 
 
+    ll x = -1;
+    for(ll b = LONG_LONG_MAX - 1; b >= 1; b/= 2){
 
+        // debug(x); 
+        while(!ok(x+b,n,k, values)){x+=b;}
+    }
+
+    debug(x);
+
+
+    cout << x + 1;
 
 
     #ifndef ONLINE_JUDGE

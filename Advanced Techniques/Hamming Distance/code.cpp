@@ -94,15 +94,27 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
+    ll n,k;
+    cin >> n >> k;
     vector<ll> values(n);
     for (int i = 0; i < n; i++)
     {
-        cin >> values[i];
+        string buff;
+        cin >> buff;
+        values[i] = stoi(buff, nullptr, 2);
     }
 
+    
+    ll mval = 65;
 
+    rep(i,0,n){
+        rep(j,i+1,n){
+            auto diff = values[j]^values[i];
+            mval = miN(mval,__builtin_popcount(diff));
+        }
+    }
+
+    cout << mval;
 
 
 

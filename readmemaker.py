@@ -37,7 +37,7 @@ soup = BeautifulSoup(r.text,"lxml")
 
 probs = soup.find_all('li',class_ = 'task')
 
-f = open("README.md", "w", encoding="utf-16")
+f = open("README_n.md", "w", encoding="utf-16")
 
 initial = '''# CSES
 

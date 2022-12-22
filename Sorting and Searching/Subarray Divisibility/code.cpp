@@ -96,11 +96,30 @@ int main()
 
     ll n;
     cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
+    vector<ll> values(n+1);
+    for (int i = 1; i < n+1; i++)
     {
         cin >> values[i];
+        values[i] += values[i-1];
     }
+    map<ll,ll> m;
+
+    debug(values);
+
+
+    ll sum = 0;
+
+    rep(i,0,n+1){
+        // debug(m);
+        sum += m[(values[i] % n + n) % n];
+        m[(values[i] % n + n) % n] += 1;
+ 
+    }
+
+    cout << sum;
+
+    debug(sum);
+
 
 
 

@@ -94,14 +94,39 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> values[i];
-    }
+    ll vis[100005], dis[100005];
+    vector<pll> adj[100005];
 
+   
+
+
+        ll n,m; 
+        cin >> n >> m;
+        rep(i,0,m){
+            ll u,v,w; 
+            cin >> u >> v >> w;
+            
+            adj[u].push_back({v,w});
+        }
+        //dijkstra
+        rep(i,2,n+1) dis[i]=INF;
+        priority_queue<pll,vector<pll>,greater<pll>> q;
+        q.push({0,1});
+        while(!q.empty()){
+            ll u = q.top().second; 
+            q.pop();
+            if (vis[u]) continue;
+            vis[u]=1;
+            for (auto [v,w] : adj[u]){
+                if (dis[v]>dis[u]+w){
+                    dis[v] = dis[u]+w;
+                    q.push({dis[v],v});
+                }
+            }
+        }
+        rep(i,1,n+1) {
+            cout << dis[i] << " ";
+        }
 
 
 

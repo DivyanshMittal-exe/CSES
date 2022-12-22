@@ -82,6 +82,24 @@ template<typename T> T lcm(T a, T b){return(a*(b/gcd(a,b)));}
 ll cdiv(ll a, ll b) { return a / b + ((a ^ b) > 0 && a % b); } // divide a by b rounded up
 ll fdiv(ll a, ll b) { return a / b - ((a ^ b) < 0 && a % b); } // divide a by b rounded down
 
+
+ll dis[2505];
+
+vl adj[2505], adj2[2505];
+bool vis[2505], vis2[2505];
+
+void dfs(ll s){
+    if (vis[s]) return;
+    vis[s]=1;
+    for (auto i: adj[s]) dfs(i);
+}
+void dfs2(ll s){
+    if (vis2[s]) return;
+    vis2[s]=1;
+    for (auto i: adj2[s]) dfs2(i);
+}
+
+
 int main()
 {
 
@@ -94,14 +112,33 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> values[i];
-    }
+    ll n,m;
+    cin >> n >> m;
 
+    rep(i,1,n+1){
+        dis[i]=INF;
+    } 
+    dis[1]=0;
+
+    vector<tuple<int,int,int>> e;
+
+    rep(i,0,m){
+        int a,b,w;
+        cin >> a >> b >> w;
+        e.push_back({a,b,-w});
+        adj[a].push_back(b), adj2[b].push_back(a);
+    }
+    dfs(1), dfs2(n);
+    rep(i,0,n){
+        for ( auto [a,b,w]: e){
+            if (dis[b]> dis[a]+w){
+                dis[b] = dis[a]+w;
+                if (i==n-1 && vis[b] && vis2[b]) {cout << -1; return 0;}
+            }
+        }
+    }
+    cout << -dis[n];
+    
 
 
 

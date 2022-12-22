@@ -73,6 +73,7 @@ const ll MAXN = 1e6;
 const ll INF = 1e15 - 1;
 const ld EPS = 1e-8;
 const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1};
+const char parent[4]{'R','D','L','U'};
 
 
 
@@ -81,6 +82,7 @@ template<typename T> T gcd(T a, T b){return(b?__gcd(a,b):a);}
 template<typename T> T lcm(T a, T b){return(a*(b/gcd(a,b)));} 
 ll cdiv(ll a, ll b) { return a / b + ((a ^ b) > 0 && a % b); } // divide a by b rounded up
 ll fdiv(ll a, ll b) { return a / b - ((a ^ b) < 0 && a % b); } // divide a by b rounded down
+bool is_valid_graph(int x, int y, int rows, int cols){return x >= 0 && y >= 0 && x < cols && y < rows;}
 
 int main()
 {
@@ -94,16 +96,102 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> values[i];
+    ll n,m;
+    cin >> n >> m;
+
+    char graph[m][n];
+    // bool vis[m][n] = {0};
+    char par[m][n];
+    deque<pair<int,int>> q;
+
+    pair<int,int> me;
+
+    rep(i,0,n){
+        rep(j,0,m){
+            cin >> graph[j][i];
+            if(graph[j][i] == 'M'){
+                q.push_back({j,i});
+            }else if(graph[j][i] == 'A' ){
+                me = {j,i};
+
+                if(j == 0 || i == 0 || j == m -1 || i == n-1){
+                    cout << "YES\n0";
+                    return 0;
+                }
+            }
+        }
     }
 
+    q.push_back(me);
+
+    
 
 
+
+    pair<int,int> backtrack_from = {-1,-1};
+
+    while (!q.empty())
+    {
+        
+        auto e = q[0];
+        q.pop_front();
+        rep(i,0,4){
+            int nx = e.first + dx[i];
+            int ny = e.second + dy[i];
+            if(is_valid_graph(nx,ny,n,m)){
+                if(graph[nx][ny] == '.'){
+                    par[nx][ny] = parent[i];
+                    q.push_back({nx,ny});
+                    graph[nx][ny]  = graph[ e.first][e.second];
+                    if(nx == 0 || ny == 0 || nx == m-1 || ny == n-1){
+                            if(graph[nx][ny] == 'A'){
+                                backtrack_from = {nx,ny};
+                                break;
+                            }
+                    }
+                }
+            }
+        }
+         
+    }
+
+    if(backtrack_from.first != -1){
+        deque<char> s;
+        while (backtrack_from != me)
+        {
+            s.push_front(par[backtrack_from.first][backtrack_from.second]);
+            switch (par[backtrack_from.first][backtrack_from.second])
+            {
+                case 'L':
+                    backtrack_from.first += 1;
+                break;
+            
+                case 'R':
+                    backtrack_from.first -= 1;
+                break;
+                case 'U':
+                    backtrack_from.second += 1;
+                break;
+                case 'D':
+                    backtrack_from.second -= 1;
+                break;
+            }
+        }
+        
+        if(sz(s) != 0){
+            cout << "YES\n";
+            cout << sz(s) << endl;
+            tr(ii,s){
+                cout << *ii ;
+            }
+
+            return 0;
+        }
+        
+
+    }
+    
+    cout << "NO\n";
 
 
 

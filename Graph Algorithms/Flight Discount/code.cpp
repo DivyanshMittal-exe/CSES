@@ -82,6 +82,13 @@ template<typename T> T lcm(T a, T b){return(a*(b/gcd(a,b)));}
 ll cdiv(ll a, ll b) { return a / b + ((a ^ b) > 0 && a % b); } // divide a by b rounded up
 ll fdiv(ll a, ll b) { return a / b - ((a ^ b) < 0 && a % b); } // divide a by b rounded down
 
+
+    vector<pair<ll,ll>> adj[100005];
+
+    ll vis_nc[100005], dis_nc[100005];
+    ll vis_c[100005], dis_c[100005];
+
+
 int main()
 {
 
@@ -94,14 +101,76 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> values[i];
+    ll n,m; 
+    cin >> n >> m;
+
+    rep(i,0,m){
+        ll u,v,w; 
+        cin >> u >> v >> w;
+        
+        adj[u].push_back({v,w});
+    }
+    //dijkstra
+    rep(i,2,n+1){
+        dis_nc[i]=INF;
+        dis_c[i]=INF;
     }
 
+
+    pqg<pll> q_nc;
+    pqg<pll> q_c;
+
+    q_nc.push({0,1});
+    q_c.push({0,1});
+
+
+    while(!q_nc.empty() || !q_c.empty()){
+        bool q_nc_stat = q_nc.empty();
+        bool q_c_stat = q_c.empty();
+
+        ll u_nc;
+        ll u_c;
+        if(!q_nc_stat){
+
+            u_nc = q_nc.top().second; 
+            q_nc.pop();
+            if (!vis_nc[u_nc]){
+                vis_nc[u_nc]=1;
+                for (auto [v,w] : adj[u_nc]){
+                    if (dis_nc[v]>dis_nc[u_nc]+w){
+                        dis_nc[v] = dis_nc[u_nc]+w;
+                        q_nc.push({dis_nc[v],v});
+                    }
+                }
+
+                for (auto [v,w] : adj[u_nc]){
+                    if (dis_c[v]>dis_nc[u_nc] + (w >> 1)){
+                        dis_c[v] = dis_nc[u_nc] + (w >> 1);
+                        q_c.push({dis_c[v],v});
+                    }
+                }
+            } 
+        }
+        
+        if(!q_c_stat){
+            u_c = q_c.top().second; 
+            q_c.pop();
+            if (!vis_c[u_c]){
+                vis_c[u_c]=1;
+                for (auto [v,w] : adj[u_c]){
+                    if (dis_c[v]>dis_c[u_c]+w){
+                        dis_c[v] = dis_c[u_c]+w;
+                        q_c.push({dis_c[v],v});
+                    }
+                }
+            } 
+        }
+    }
+
+    cout << min(dis_c[n],dis_nc[n]);
+        // rep(i,1,n+1) {
+        //     cout << dis[i] << " ";
+        // }
 
 
 

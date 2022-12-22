@@ -1,4 +1,4 @@
-#pragma GCC optimize("Ofast,unroll-loops") 
+// #pragma GCC optimize("Ofast,unroll-loops") 
 #include <bits/stdc++.h>
 using namespace std;
 mt19937 RNG(chrono::steady_clock::now().time_since_epoch().count());
@@ -96,13 +96,34 @@ int main()
 
     ll n;
     cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
+    vector<ll> values(n+1);
+    vector<ll> sol(n+1);
+
+    for (int i = 1; i < n+1; i++)
     {
         cin >> values[i];
     }
 
+    values[0] = INT_MIN;
 
+    deque<ll> s;
+
+    s.push_back(0);
+
+    rep(i,1,n+1){
+        debug(s);
+        while (values[s.back()] >= values[i]){
+            s.pop_back();
+        }
+        sol[i] = s.back();
+        s.push_back(i);
+    }    
+
+    rep(i,1,n+1){
+        cout << sol[i] << " ";
+    }
+
+    debug(sol);
 
 
 

@@ -69,11 +69,12 @@ typedef vector<pii> vii;
 typedef vector<ll> vl;
 typedef vector<vl> vvl;
 const ll MOD = 1e9 + 7;
-const ll MAXN = 1e6;
+// const ll MAXN = 1e6;
 const ll INF = 1e15 - 1;
 const ld EPS = 1e-8;
 const int dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1};
 
+const int maxN = 5e4+1;
 
 
 // ----------------------<MATH>--------------------------- 
@@ -81,6 +82,9 @@ template<typename T> T gcd(T a, T b){return(b?__gcd(a,b):a);}
 template<typename T> T lcm(T a, T b){return(a*(b/gcd(a,b)));} 
 ll cdiv(ll a, ll b) { return a / b + ((a ^ b) > 0 && a % b); } // divide a by b rounded up
 ll fdiv(ll a, ll b) { return a / b - ((a ^ b) < 0 && a % b); } // divide a by b rounded down
+
+
+
 
 int main()
 {
@@ -94,13 +98,122 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> values[i];
+    ll n,m;
+    cin >> n >> m;
+
+
+    vector<bitset<maxN>> b(n);
+    deque<ll> q;
+    vector<vector<ll>> g(n);
+    vector<ll> ind(n);
+
+    rep(i,0,m){
+        ll a,b;
+        cin >> a >> b;
+        a--;
+        b--;
+        g[b].push_back(a);
+        ind[a]++;
     }
+
+    rep(i,0,n){
+        if(ind[i] == 0){
+            q.push_back(i);
+            b[i].set(i);
+        }
+    }
+
+    while (!q.empty())
+    {
+        auto e = q.front();
+        q.pop_front();
+
+        for(auto x: g[e]){
+            b[x] |= b[e];
+            ind[x] --;
+            if(ind[x] == 0){
+                q.push_back(x);
+                b[x].set(x);
+            }
+        }
+
+
+    }
+
+    rep(i,0,n){
+        cout << b[i].count() << " ";
+    }
+    
+
+
+    // vector<vector<ll>> g(n);
+    // vector<vector<ll>> rg(n);
+
+    // vector<bool> vis(n);
+    // vector<bool> rvis(n);
+
+    // rep(i,0,m){
+    //     ll a,b;
+    //     cin >> a >> b;
+    //     --a;
+    //     --b;
+
+    //     g[a].push_back(b);
+    //     rg[b].push_back(a);
+    // }
+
+    // vector<ll> s;
+
+    // function<void(int)> f_dfs = [&](int node) -> void{
+    //     if(vis[node]){
+    //         return;
+    //     }else{
+    //         vis[node] = true;
+    //         for(auto ne: g[node]){
+    //             f_dfs(ne);
+    //         }
+    //         s.push_back(node);
+    //     }
+    // };
+
+
+    // rep(i,0,n){
+    //     f_dfs(i);
+    // }
+
+    // int label = 0;
+    // vector<ll> labels(n);
+
+    // function<void(int)> r_dfs = [&](int node) -> void{
+    // if(rvis[node]){
+    //     return;
+    // }else{
+    //         rvis[node] = true;
+    //         labels[node] = label;
+    //         for(auto ne: rg[node]){
+    //             r_dfs(ne);
+    //         }
+    //     }
+    // };
+
+
+    // rtr(ii,s){
+    //     if(rvis[*ii] != true){
+    //         label ++;
+    //         r_dfs(*ii);       
+    //     }
+
+    // }
+
+    // map<ll,ll> mp;
+
+    // tr(ii,labels){
+    //     mp[(*ii)]++;
+    // }
+
+    // rep(i,0,n){
+    //     cout << mp[labels[i]] << " ";
+    // }
 
 
 

@@ -94,14 +94,34 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
+    ll n,k;
+    cin >> n >> k;
     vector<ll> values(n);
     for (int i = 0; i < n; i++)
     {
         cin >> values[i];
     }
 
+    map<int,int> m;
+
+    ll sum = 0;
+
+    ll back_it = 0;
+
+    ll l = 0, r = 0, c = 0, ans = 0;
+
+    while(l < n) {
+        while(r < n && c + (m[values[r]] == 0) <= k) {
+            m[values[r]]++; 
+            c += (m[values[r]] == 1);
+            r++; 
+        }
+        ans += r-l;
+        c -= (m[values[l]] == 1);
+        m[values[l]]--, l++;
+    }
+    cout<<ans;
+    
 
 
 
