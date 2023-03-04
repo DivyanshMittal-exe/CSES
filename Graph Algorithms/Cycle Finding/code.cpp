@@ -94,13 +94,83 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
+    ll n,m;
+    cin >> n >> m;
+
+    // vector<vector<pair<long,long>>> g(n);
+
+    vector<tuple<int,int,int>> e(m);
+
+    vector<long> p(n,-1);
+    vector<long> d(n,MAXN);
+
+    d[0] = 0;
+    p[0] = 0;
+
+
+    // vector<ll> values(n);
+    for (int i = 0; i < m; i++)
     {
-        cin >> values[i];
+        ll a,b,c;
+        cin >> a >> b >> c;
+        --a;
+        --b;
+        e[i] = {a,b,c};
+        // g[a].push_back({b,c});
     }
+
+    rep(i,0,n){
+        rep(j,0,m){
+            ll a = get<0>(e[j]);
+            ll b = get<1>(e[j]);
+            ll c = get<2>(e[j]);
+            if(d[b] > d[a] + c){
+                d[b] = d[a] + c;
+                p[b] = a;
+            } 
+        }
+    }
+
+    ll part = -1;
+
+    rep(j,0,m){
+        ll a = get<0>(e[j]);
+        ll b = get<1>(e[j]);
+        ll c = get<2>(e[j]);
+        if(d[b] > d[a] + c){
+            part = a;
+            break;
+        } 
+    }
+
+    if(part == -1){
+        cout << "NO";
+
+    }else{
+        cout << "YES\n";
+        vector<ll> bta;
+        set<ll> vs;
+
+        bta.push_back(part);
+        vs.insert(part);
+        while(!vs.count(p[part])){
+            part = p[part];
+            bta.push_back(part);
+            vs.insert(part);
+        }
+        cout << p[part]+ 1 << " ";
+        rtr(ii,bta){
+           
+            cout << *ii + 1<< " ";
+             if(*ii == p[part]){
+                break;
+            }
+
+        }
+    }
+
+
+
 
 
 

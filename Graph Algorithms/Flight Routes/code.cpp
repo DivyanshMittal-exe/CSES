@@ -22,7 +22,7 @@ void __print(bool x) {cerr << (x ? "true" : "false");}
 template<typename T, typename V>
 void __print(const pair<T, V> &x) {cerr << '{'; __print(x.first); cerr << ','; __print(x.second); cerr << '}';}
 template<typename T>
-void __print(const T &x) {int f = 0; cerr << '{'; for (auto &i: x) cerr << (f++ ? "," : ""), __print(i); cerr << "}";}
+void __print(const T &x) {int f = 0; cerr << '{'; for(auto &i: x) cerr << (f++ ? "," : ""), __print(i); cerr << "}";}
 void _print() {cerr << "]\n";}
 template <typename T, typename... V>
 void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v...);}
@@ -94,13 +94,74 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
+    ll n,m,k;
+    cin >> n >> m >> k;
+    // vector<ll> values(n);
+    vector<vector<pair<long,long>>> g(n);
+    for (int i = 0; i < m; i++)
     {
-        cin >> values[i];
+        // cin >> values[i];
+        ll a,b,c;
+        cin >> a >> b >> c;
+        --a;
+        --b;
+        g[a].push_back({b,c});
     }
+
+    pqg<pair<long,long>> pg_m;
+
+    pg_m.push({0,0});
+
+    vector<priority_queue<long>> pq_a(n);
+
+    pq_a[0].push(0);
+
+    while (!pg_m.empty())
+    {
+        auto t = pg_m.top();
+        debug(t);
+
+        pg_m.pop();
+
+        if(t.first > pq_a[t.second].top()){
+            continue;
+        }
+
+        for(auto x: g[t.second]){
+            // auto tc = pq_a[x.first].top();
+            ll ttt = t.first + x.second;
+            // pq_a[x.first].push(t.first + x.second);
+            if(pq_a[x.first].size() < k){
+                pq_a[x.first].push(ttt);
+                pg_m.push({ttt, x.first}); 
+            }else if(ttt < pq_a[x.first].top() ){
+                pq_a[x.first].pop();
+                pq_a[x.first].push(ttt);
+                pg_m.push({ttt, x.first}); 
+            }
+            // pg_m.push({t.first + x.second, x.first}); 
+        }
+    }
+    
+    // debug(pq_a[n-1].size());
+
+    
+
+    vector<long> v;
+    while (!pq_a[n-1].empty())
+    {   
+
+        v.push_back(pq_a[n-1].top());
+        pq_a[n-1].pop();
+    }
+
+    debug(v);
+
+
+    rtr(ii,v){
+        cout << *ii << " ";
+    }
+    
 
 
 

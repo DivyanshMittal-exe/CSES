@@ -93,17 +93,42 @@ int main()
 
     fastio;
 
+    const int dep = 32;
 
-    ll n;
-    cin >> n;
+    ll n,q;
+    cin >> n >> q;
     vector<ll> values(n);
+    vector<vector<int>> parents(dep,vector<int>(n,-1));
+
     for (int i = 0; i < n; i++)
     {
-        cin >> values[i];
+        cin >> parents[0][i];
+        parents[0][i]--;
+    }
+
+    for(int i = 1; i < dep; i++){
+        for (int j = 0; j < n; j++)
+        {
+            parents[i][j] = parents[i-1][parents[i-1][j]];
+        }        
     }
 
 
+    rep(i,0,q){
+        ll x,k;
+        cin >> x >> k;
+        ll am_at = x - 1;
+        for(int i = 31; i >= 0; i--){
+            if(k & (ll)1 << i){
+                am_at = parents[i][am_at];
+            }
+        }
 
+        cout << am_at + 1 << endl;
+ 
+
+
+    }
 
 
 

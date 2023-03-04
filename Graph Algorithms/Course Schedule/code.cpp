@@ -94,13 +94,62 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
+    ll n,m;
+    cin >> n  >> m;
+    vector<vector<ll>> graph(n);
+    vector<ll> in_degree(n,0);
+    // vector<ll> values(n);
+    for (int i = 0; i < m; i++)
     {
-        cin >> values[i];
+        int a,b;
+        cin >> a >> b;
+
+        --a;
+        --b;
+        graph[a].push_back(b);
+        in_degree[b]++;
+        // cin >> values[i];
+
     }
+
+    debug(graph);
+    debug(in_degree);
+
+
+    deque<int> in_degree_0;
+    for(int i = 0; i < n; i++){
+        if(in_degree[i] == 0){
+            in_degree_0.push_back(i);
+        }
+    }
+
+
+    vector<int> topo_sort;
+
+    while (in_degree_0.size())
+    {
+        auto e = in_degree_0.front();
+        in_degree_0.pop_front();
+        topo_sort.push_back(e);
+        for(auto neighbour: graph[e]){
+            in_degree[neighbour]--;
+            if(in_degree[neighbour] == 0){
+                in_degree_0.push_back(neighbour);
+            }
+        }
+    }
+
+    debug(topo_sort);
+
+
+    if(topo_sort.size()!=n){
+        cout << "IMPOSSIBLE";
+    }else{
+        for(auto x: topo_sort){
+            cout << x+1 << " ";
+        }
+    }
+    
 
 
 

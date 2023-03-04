@@ -82,6 +82,74 @@ template<typename T> T lcm(T a, T b){return(a*(b/gcd(a,b)));}
 ll cdiv(ll a, ll b) { return a / b + ((a ^ b) > 0 && a % b); } // divide a by b rounded up
 ll fdiv(ll a, ll b) { return a / b - ((a ^ b) < 0 && a % b); } // divide a by b rounded down
 
+ll count_path(ll query_node,const vector<vector<ll>>& graph, vector<ll> &count_path_from_node ){
+    ll n = graph.size();
+
+
+    debug(query_node);
+    debug(count_path_from_node);
+
+    if(query_node == n-1){
+        count_path_from_node[query_node] = 1;
+        return 1;
+    }
+
+
+    if(graph[query_node].size()==0){
+        return -INF;
+    }
+
+
+    if(count_path_from_node[query_node] != -1){
+        return count_path_from_node[query_node];
+    }
+
+    ll total_paths = 0;
+    for(auto x: graph[query_node]){
+        ll len_from_x = count_path(x,graph,count_path_from_node);
+        debug(query_node,x,len_from_x);
+        if(len_from_x != -INF){
+            total_paths +=  len_from_x;
+            total_paths %= MOD;
+        }
+    }
+
+    count_path_from_node[query_node] = total_paths;
+    debug(count_path_from_node);
+
+    return total_paths;
+
+}
+
+void recursive_print(ll query_node,const vector<vector<ll>>& graph, vector<ll> &count_path_from_node ){
+    if(query_node == graph.size()-1){
+        cout << query_node + 1 ;
+        return;
+    }
+
+    debug(query_node);
+
+    cout << query_node + 1 << " ";
+    ll max_index = -1;
+    ll max_element = -INF;
+
+
+    for(auto x: graph[query_node]){
+         if(count_path_from_node[x] >= max_element){
+            max_element = count_path_from_node[x];
+            max_index = x;
+         }
+    }
+
+    if(max_index == -1){
+        return;
+    }
+
+    recursive_print(max_index,graph,count_path_from_node);
+
+    // std::distance(sampleArray.begin(),std::max_element(sampleArray.begin(), sampleArray.end()))
+}
+
 int main()
 {
 
@@ -94,13 +162,47 @@ int main()
     fastio;
 
 
-    ll n;
-    cin >> n;
-    vector<ll> values(n);
-    for (int i = 0; i < n; i++)
+    ll n,m;
+    cin >> n  >> m;
+    vector<vector<ll>> graph(n);
+    vector<ll> in_degree(n,0);
+    // vector<ll> values(n);
+    for (int i = 0; i < m; i++)
     {
-        cin >> values[i];
+        ll a,b;
+        cin >> a >> b;
+
+        --a;
+        --b;
+        graph[a].push_back(b);
+        // in_degree[b]++;
+        // cin >> values[i];
+
     }
+
+    debug(graph);
+
+
+    vector<ll> count_path_from_node(n,-1);
+
+    ll max_len = count_path(0,graph,count_path_from_node);
+
+    debug(max_len);
+    
+    debug("Printing Mode");
+    debug(count_path_from_node); 
+
+    cout << max_len;
+
+
+    // if(max_len == -INF){
+    //     cout << "IMPOSSIBLE";
+    // }else{
+    //     cout << max_len + 1 << endl;
+
+    //     // recursive_print(0,graph,count_path_from_node);
+    // }
+    
 
 
 

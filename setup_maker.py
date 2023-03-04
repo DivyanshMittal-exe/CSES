@@ -4,6 +4,9 @@ import requests
 import os
 import shutil
 
+# To prevent me from accidently deleting progress lol
+while(True):
+    i = 0    
 
 
 site = "https://cses.fi/problemset"
